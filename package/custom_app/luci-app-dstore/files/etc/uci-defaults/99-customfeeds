@@ -1,0 +1,54 @@
+#!/bin/sh
+
+FEEDS_FILE="/etc/opkg/customfeeds.conf"
+FEEDS_URL="https://dotywrt.github.io/dotywrt/24.10.2/V3.2/packages"
+FEED_NAME="dotywrt"
+KEY_CONTENT="RWTtH/w9XkdnFxLPusltDzV2G6YkQ2WSmi8hHPyJVVqCraE0NtErEjbH"
+KEY_COMMENT="untrusted comment: Local build key"
+KEY_FILE="/tmp/key-build.pub"
+
+add_feed() {
+    FEED_LINE="src/gz $FEED_NAME $FEEDS_URL"
+    if ! grep -qF "$FEED_LINE" "$FEEDS_FILE"; then
+        echo "$FEED_LINE" >> "$FEEDS_FILE"
+        echo "[INFO] Feed added: $FEED_LINE"
+    else
+        echo "[INFO] Feed already exists: $FEED_LINE"
+    fi
+}
+
+add_key() {
+    if grep -rqF "$KEY_CONTENT" /etc/opkg/keys/; then 
+        return
+    fi
+
+    cat > "$KEY_FILE" <<EOF
+$KEY_COMMENT
+$KEY_CONTENT
+EOF
+
+    opkg-key add "$KEY_FILE"
+    rm -f "$KEY_FILE" 
+}
+
+clean_duplicates() {
+    for conf in /etc/opkg/*.conf; do
+        [ -f "$conf" ] || continue
+        echo "[INFO] Cleaning: $conf"
+        awk '!seen[$0]++' "$conf" > /tmp/cleaned_opkg.conf
+        mv /tmp/cleaned_opkg.conf "$conf"
+    done
+}
+
+clear_lock() {
+    if [ -f /var/lock/opkg.lock ]; then
+        rm -f /var/lock/opkg.lock 
+    fi
+}
+ 
+add_feed
+add_key
+clean_duplicates
+clear_lock
+ 
+exit 0

@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+
+#include "rk356x-u-boot.dtsi"
+
+/ {
+	chosen {
+		stdout-path = &uart2;
+	};
+};
+
+&gpio0 {
+	bootph-pre-ram;
+};
+
+&uart2 {
+	clock-frequency = <24000000>;
+	bootph-all;
+	status = "okay";
+};
+
+&vcc3v3_sd {
+	bootph-pre-ram;
+};
