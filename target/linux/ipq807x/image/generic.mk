@@ -23,6 +23,22 @@ define Device/UbiFit
 	IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 
+define Device/sagemcom_5866t
+	$(call Device/FitImage)
+	$(call Device/EmmcImage)
+	DEVICE_VENDOR := Sagemcom
+	DEVICE_MODEL := 5866T
+	DEVICE_DTS_CONFIG := config@hk01.c6
+	SOC := ipq8072
+	KERNEL_SIZE := 12288k
+	IMAGES := sysupgrade.bin factory.bin kernel.bin
+	IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+	IMAGE/factory.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-rootfs | append-metadata
+	IMAGE/kernel.bin := append-kernel 
+	DEVICE_PACKAGES := kmod-pcie-mhi ipq-wifi-sagemcom_5866t
+endef
+TARGET_DEVICES += sagemcom_5866t
+
 define Device/arcadyan_aw1000
 	$(call Device/FitImage)
 	$(call Device/UbiFit)

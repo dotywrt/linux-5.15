@@ -10,6 +10,13 @@ arcadyan,aw1000)
 	ucidef_set_led_netdev "5g" "5G" "green:5g" "wwan0"
 	ucidef_set_led_netdev "wan" "WAN" "green:internet" "wan"
 	;;
+sagemcom,5866t)
+    ucidef_set_led_wlan "wlan_green" "WLAN_GREEN" "green:wlan" "phy0radio"
+	ucidef_set_led_default "led1_green" "LED1" "green:status_1" "1"
+    ucidef_set_led_default "led2_green" "LED2" "green:status_2" "1"
+    ucidef_set_led_default "led3_green" "LED3" "green:status_3" "1"
+    ucidef_set_led_default "led4_green" "LED4" "green:status_4" "1"
+    ;;
 edgecore,eap102)
 	ucidef_set_led_netdev "wan" "WAN" "green:wanpoe" "wan"
 	;;
