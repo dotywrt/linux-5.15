@@ -51,6 +51,7 @@ platform_do_upgrade() {
 		nand_do_restore_config || nand_do_upgrade_failed
 		buffalo_upgrade_optvol
 		;;
+	arcadyan,aw1000|\
 	dynalink,dl-wrx36)
 		nand_do_upgrade "$1"
 		;;
