@@ -28,8 +28,8 @@ endef
 # <https://wireless.wiki.kernel.org/en/users/drivers/ath10k/boardfiles>
 
 ALLWIFIBOARDS:= \
-  sagemcom_5866t \
-  arcadyan_aw1000 \
+    sagemcom_5866t \
+    arcadyan_aw1000 \
 	buffalo_wxr-5950ax12 \
 	compex_wpq873 \
 	dynalink_dl-wrx36 \
