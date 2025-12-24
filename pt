@@ -1,0 +1,161 @@
+&qpic_nand {
+    status = "okay";
+
+    nand@0 {
+        reg = <0>;
+        nand-ecc-strength = <8>;
+        nand-ecc-step-size = <512>;
+        nand-bus-width = <8>;
+
+        partitions {
+            compatible = "fixed-partitions";
+            #address-cells = <1>;
+            #size-cells = <1>;
+
+            partition@0 {
+                label = "0:SBL1";
+                reg = <0x00000000 0x100000>;
+                read-only;
+            };
+
+            partition@100000 {
+                label = "0:MIBIB";
+                reg = <0x100000 0x100000>;
+                read-only;
+            };
+
+            partition@200000 {
+                label = "0:BOOTCONFIG";
+                reg = <0x200000 0x80000>;
+                read-only;
+            };
+
+            partition@280000 {
+                label = "0:BOOTCONFIG1";
+                reg = <0x280000 0x80000>;
+                read-only;
+            };
+
+            partition@300000 {
+                label = "0:QSEE";
+                reg = <0x300000 0x300000>;
+                read-only;
+            };
+
+            partition@600000 {
+                label = "0:QSEE_1";
+                reg = <0x600000 0x300000>;
+                read-only;
+            };
+
+            partition@900000 {
+                label = "0:DEVCFG";
+                reg = <0x900000 0x80000>;
+                read-only;
+            };
+
+            partition@980000 {
+                label = "0:DEVCFG_1";
+                reg = <0x980000 0x80000>;
+                read-only;
+            };
+
+            partition@a00000 {
+                label = "0:APDP";
+                reg = <0xa00000 0x80000>;
+                read-only;
+            };
+
+            partition@a80000 {
+                label = "0:APDP_1";
+                reg = <0xa80000 0x80000>;
+                read-only;
+            };
+
+            partition@b00000 {
+                label = "0:RPM";
+                reg = <0xb00000 0x80000>;
+                read-only;
+            };
+
+            partition@b80000 {
+                label = "0:RPM_1";
+                reg = <0xb80000 0x80000>;
+                read-only;
+            };
+
+            partition@c00000 {
+                label = "0:CDT";
+                reg = <0xc00000 0x80000>;
+                read-only;
+            };
+
+            partition@c80000 {
+                label = "0:CDT_1";
+                reg = <0xc80000 0x80000>;
+                read-only;
+            };
+
+            partition@d00000 {
+                label = "0:APPSBLENV";
+                reg = <0xd00000 0x80000>;
+            };
+
+            partition@d80000 {
+                label = "0:APPSBL";
+                reg = <0xd80000 0x100000>;
+                read-only;
+            };
+
+            partition@e80000 {
+                label = "0:APPSBL_1";
+                reg = <0xe80000 0x100000>;
+                read-only;
+            };
+
+            partition@f80000 {
+                label = "0:ART";
+                reg = <0xf80000 0x80000>;
+                read-only;
+            };
+
+            partition@1000000 {
+                label = "rootfs_bak";
+                reg = <0x1000000 0x6400000>;  // 100MB
+            };
+
+            partition@7400000 {
+                label = "0:WIFIFW";
+                reg = <0x7400000 0x1880000>;  // 24.5MB
+                read-only;
+            };
+
+            partition@8c80000 {
+                label = "rootfs1_bak";
+                reg = <0x8c80000 0x6400000>;  // 100MB
+            };
+
+            partition@f080000 {
+                label = "0:WIFIFW_1";
+                reg = <0xf080000 0x1880000>;  // 24.5MB
+                read-only;
+            };
+            
+            partition@10900000 {
+                label = "0:ETHPHYFW";
+                reg = <0x10900000 0x240000>;  // 2.25MB
+                read-only;
+            };
+
+            partition@10b40000 {
+                label = "0:board_data";
+                reg = <0x10b40000 0x100000>;  // 1MB
+            };
+            
+            partition@10c40000 {
+                label = "rootfs";
+                reg = <0x10c40000 0x2bd00000>;  // 701MB
+            };
+        };
+    };
+};
